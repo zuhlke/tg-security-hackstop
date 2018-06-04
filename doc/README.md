@@ -10,7 +10,6 @@ have no way to attack systems on the public Internet, only our system under test
 Kali Linux and and OWASP's ZAP as attacking systems. WordPress and optionally RocketChat will act as the systems under attack.
 Splunk is used as the log aggregator (subsequently possibly ELK). A machine learning system remains to be identified.
 
-
 # AWS configuration
 
 * VPC configuration `vpc-91d1bbfa` with 3 subnet:
@@ -43,6 +42,10 @@ Splunk is used as the log aggregator (subsequently possibly ELK). A machine lear
     * Worker Nodes:
         * Node 1
         * Node 2
+
+# Setup Commands for AWS etc on Macintosh
+
+See [Macintosh Setup](MacintoshSetup.md)
 
 # Maintaining this Project
 
