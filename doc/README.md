@@ -40,9 +40,15 @@ Splunk is used as the log aggregator (subsequently possibly ELK). A machine lear
     * Kubernetes cluster
 * Kubernetes cluster:
     * Api Node: `api.firstinstall...`
+    ```
+    $ssh admin@18.195.49.153
+    ```
     * Worker Nodes:
         * Node 1
-        * Node 2
+        ```
+        $ssh admin@35.159.0.23
+        ```
+    * Node 2 *(maybe will be started)*
 
 # Maintaining this Project
 
