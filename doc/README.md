@@ -10,6 +10,24 @@ have no way to attack systems on the public Internet, only our system under test
 Kali Linux and and OWASP's ZAP as attacking systems. WordPress and optionally RocketChat will act as the systems under attack.
 Splunk is used as the log aggregator (subsequently possibly ELK). A machine learning system remains to be identified.
 
+
+# AWS configuration
+
+* VPC configuration `vpc-91d1bbfa` with 3 subnet:
+    1. Public subnet for attacker: `subnet-65037428`
+    1. Public subnet for splunk: `subnet-04d4e26f`
+    1. Private subnet for hacker: `subnet-04d4e26f`
+* Server configured:
+    * NAT server
+    * Jump Server 
+    * Splunk 
+    * Kubernetes cluster
+* Kubernetes cluster:
+    * Api Node: `api.firstinstall...`
+    * Worker Nodes:
+        * Node 1
+        * Node 2
+
 # Maintaining this Project
 
 ## Coding Tools
@@ -28,3 +46,4 @@ To view / edit diagrams, use yEd (https://www.yworks.com/downloads#yEd)
 ## Other Tools
 
 To edit textual documents and presentations, use MS Office.
+
