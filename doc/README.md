@@ -20,6 +20,22 @@ Splunk is used as the log aggregator (subsequently possibly ELK). A machine lear
 * Server configured:
     * NAT server
     * Jump Server 
+    * OSWAP Zap
+    In order to connect with Oswap Zap server you need to perform the following steps
+    ```
+    $ ssh-agent
+    $ ssh-add .ssh/hackstop.pem
+    $ ssh -L 3389:10.0.1.67:3389 ec2-user@18.197.122.197
+    ```
+    after remote desktop (rdp) to `localhost`
+    * Kali Linux
+    Connection with kali linux in this way:
+    ```
+    $ ssh-agent
+    $ ssh-add .ssh/hackstop.pem
+    $ ssh ec2-user@18.197.122.197
+    [jump server]$ ssh -i .ssh/hackstop.pem ec2-user@10.0.1.137 
+    ```
     * Splunk 
     * Kubernetes cluster
 * Kubernetes cluster:
