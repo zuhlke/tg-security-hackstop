@@ -66,6 +66,20 @@ Instead of authenticating using a bearer token or the yaml file, just click SKIP
 
 See [Macintosh Setup](MacintoshSetup.md)
 
+## Access the Wordpress front end
+Extract the auto-generated password:
+```
+kubectl --context=frontoffice.hackstop.iotbox.online get secret \
+front-office-release-wordpress -o yaml | awk '/wordpress-password/ {print $2}' \
+| base64 -D
+```
+Find the DNS entry corresponding to the elastic load balancer that hel created automatically
+for this application (currently a9cb182e468ba11e8af040298a0eac29-1711594512.eu-central-1.elb.amazonaws.com):
+
+https://eu-central-1.console.aws.amazon.com/ec2/v2/home?region=eu-central-1#LoadBalancers:sort=loadBalancerName
+
+Log on as "user": http://a9cb182e468ba11e8af040298a0eac29-1711594512.eu-central-1.elb.amazonaws.com/
+
 # Maintaining this Project
 
 ## Coding Tools
