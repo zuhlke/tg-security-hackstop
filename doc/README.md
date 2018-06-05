@@ -38,20 +38,29 @@ Splunk is used as the log aggregator (subsequently possibly ELK). A machine lear
     * Splunk 
     * Kubernetes cluster
 * Kubernetes cluster:
-    * Api Node: `api.firstinstall...`
+    * Api Node (master): `api.firstinstall...`
     ```
-    $ssh admin@18.195.49.153
+    $ssh admin@35.158.122.47
     ```
     * Worker Nodes:
         * Node 1
         ```
         $ssh admin@35.159.0.23
         ```
-    * Node 2 *(maybe will be started)*
+        * Node 2
+        ```
+        $ssh admin@18.196.63.219
+        ```
 
 ## Installation of kubernetes console
 [Kubernetes console](https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/)
 
+Log into the Kubernetes console:
+```
+kubectl proxy & # if you haven't yet started the proxy on your local host
+open 'http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/'
+```
+Instead of authenticating using a bearer token or the yaml file, just click SKIP.
 
 # Setup Commands for AWS etc on Macintosh
 
