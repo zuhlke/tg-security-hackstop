@@ -49,6 +49,10 @@ Splunk is used as the log aggregator (subsequently possibly ELK). A machine lear
         ```
     * Node 2 *(maybe will be started)*
 
+## Installation of kubernetes console
+[Kubernetes console](https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/)
+
+
 # Setup Commands for AWS etc on Macintosh
 
 See [Macintosh Setup](MacintoshSetup.md)
