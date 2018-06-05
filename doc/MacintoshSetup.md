@@ -22,6 +22,8 @@ eval $(minikube docker-env)
 docker ps
 minikube dashboard
 ```
+Ensure that you have at least version 2.9.1 of helm.
+Otherwise you may see "connection refused" on localhost:8080.
 ## AWS console
 
 * https://zuhlke-engineering-ltd.signin.aws.amazon.com/console
@@ -87,7 +89,8 @@ kops get cluster
 kops edit cluster frontoffice.hackstop.iotbox.online
 kops edit ig --name=frontoffice.hackstop.iotbox.online nodes
 kops edit ig --name=frontoffice.hackstop.iotbox.online master-eu-central-1a
-  In both cases, change machine type to t2.small and add the following after nodeLabels:
+  In both cases, change machine type to t2.small and add the
+  following directly below the label "spec", indented by 2 spaces:
   cloudLabels:
     Project: I15000_CU_DEV
     Description: Hackstop project for June 2018 Zuhlke days
@@ -107,4 +110,24 @@ exit
 # To Shut Down and Delete Instances
 ```
 kops delete cluster frontoffice.hackstop.iotbox.online --yes
+```
+# Add Wordpress to the Cluster
+## Initialise Helm
+The following commands are needed only once.
+```
+kubectl create serviceaccount --namespace kube-system tiller
+kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
+kubectl -n kube-system patch deployment tiller-deploy -p '{"spec": {"template": {"spec": {"automountServiceAccountToken": true}}}}'
+helm init --service-account tiller --upgrade
+kubectl get pods --all-namespaces
+```
+The last command should list nothing in the default namespace. If there are
+applications already running, use the `kubectl delete <context>` command to
+uninstall them.
+## Start Wordpress and MariaDB
+The following commands are needed to deploy the application. The 
+```
+cd .../wordpress
+helm install --name front-office-release -f ./values-production.yaml stable/wordpress
+kubectl get svc --namespace default -w front-office-release-wordpress
 ```
