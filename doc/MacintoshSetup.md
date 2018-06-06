@@ -119,6 +119,7 @@ kubectl get nodes --show-labels
 ssh -i ~/.ssh/hackstop.pem admin@api.frontoffice.hackstop.iotbox.online
 exit
 ```
+You can use the same SSH command for each of the instances of the cluster.
 # To Shut Down and Delete Instances
 ```
 kops delete cluster frontoffice.hackstop.iotbox.online --yes
@@ -140,8 +141,34 @@ uninstall them.
 The following commands are needed to deploy the application. The 
 ```
 cd .../wordpress
-kubectl create -f persistent-volume.yaml
-helm install stable/nfs-server-provisioner --set persistence.enabled=true,persistence.size=10Gi,
 helm install --name front-office-release -f ./values-production.yaml stable/wordpress
 kubectl get svc --namespace default -w front-office-release-wordpress
+```
+## Add and activate Wordpress Plugins
+Log into Wordpress, then go to the Plugins menu and add & activate the following:
+* wp2syslog by psicosi448
+* Logs Display by Steeve Lefebvre
+* Loginizer by Raj Kothari
+* Stream by XWP
+Update all plugins as indicated on the dashboard.
+## Alter Apache configuration to log to syslog
+```
+ssh -i ~/.ssh/hackstop.pem admin@<node 2>
+sudo -i
+docker ps
+docker exec -it <wordpress-container> /bin/bash
+apt-get install vim-tiny
+cd /opt/bitnami/apache/conf
+cp -p httpd.conf httpd.conf.bak
+vi httpd.conf
+diff httpd.conf*
+275c275
+< ErrorLog "| /usr/bin/tee -a logs/error_log | /usr/bin/logger -t httpd -i -p local4.error"
+---
+> ErrorLog "logs/error_log"
+304c304
+<     CustomLog "| /usr/bin/tee -a logs/access_log | /usr/bin/logger -t httpd -i -p local4.info" common
+---
+>     CustomLog "logs/access_log" common
+../bin/apachectl restart
 ```
