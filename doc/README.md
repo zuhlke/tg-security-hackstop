@@ -50,7 +50,18 @@ Splunk is used as the log aggregator (subsequently possibly ELK). A machine lear
     * Node 2 *(maybe will be started)*
 
 ## Installation of kubernetes console
-[Kubernetes console](https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/)
+Reference documentation for the console: [Kubernetes console](https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/)
+
+Installation command:
+```
+kubectl create -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
+```
+
+Accessing the console, the simplest way is to use kubernetes proxy
+```
+kubectl proxy
+```
+and after going to the following link [http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/](http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/).
 
 
 # Setup Commands for AWS etc on Macintosh
