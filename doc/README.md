@@ -38,16 +38,19 @@ Splunk is used as the log aggregator (subsequently possibly ELK). A machine lear
     * Splunk 
     * Kubernetes cluster
 * Kubernetes cluster:
-    * Api Node: `api.firstinstall...`
+    * Api Node (master): `api.firstinstall...`
     ```
-    $ssh admin@18.195.49.153
+    $ssh admin@35.158.122.47
     ```
     * Worker Nodes:
         * Node 1
         ```
         $ssh admin@35.159.0.23
         ```
-    * Node 2 *(maybe will be started)*
+        * Node 2
+        ```
+        $ssh admin@18.196.63.219
+        ```
 
 ## Installation of kubernetes console
 Reference documentation for the console: [Kubernetes console](https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/)
@@ -63,10 +66,30 @@ kubectl proxy
 ```
 and after going to the following link [http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/](http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/).
 
+Log into the Kubernetes console:
+```
+kubectl proxy & # if you haven't yet started the proxy on your local host
+open 'http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/'
+```
+Instead of authenticating using a bearer token or the yaml file, just click SKIP.
 
 # Setup Commands for AWS etc on Macintosh
 
 See [Macintosh Setup](MacintoshSetup.md)
+
+## Access the Wordpress front end
+Extract the auto-generated password:
+```
+kubectl --context=frontoffice.hackstop.iotbox.online get secret \
+front-office-release-wordpress -o yaml | awk '/wordpress-password/ {print $2}' \
+| base64 -D
+```
+Find the DNS entry corresponding to the elastic load balancer that hel created automatically
+for this application (currently a9cb182e468ba11e8af040298a0eac29-1711594512.eu-central-1.elb.amazonaws.com):
+
+https://eu-central-1.console.aws.amazon.com/ec2/v2/home?region=eu-central-1#LoadBalancers:sort=loadBalancerName
+
+Log on as "user": http://a9cb182e468ba11e8af040298a0eac29-1711594512.eu-central-1.elb.amazonaws.com/
 
 # Maintaining this Project
 

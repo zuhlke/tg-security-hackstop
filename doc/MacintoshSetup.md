@@ -87,6 +87,17 @@ kops create secret --name frontoffice.hackstop.iotbox.online sshpublickey admin 
 kops create cluster --zones=eu-central-1a frontoffice.hackstop.iotbox.online
 kops get cluster
 kops edit cluster frontoffice.hackstop.iotbox.online
+  Add the following to the spec to enable dynamic provisioning of persistent volumes:
+  kubeAPIServer:
+    admissionControl:
+    - NamespaceLifecycle
+    - LimitRanger
+    - ServiceAccount
+    - PersistentVolumeLabel
+    - DefaultStorageClass
+    - ResourceQuota
+    - PodSecurityPolicy
+    - DefaultTolerationSeconds
 kops edit ig --name=frontoffice.hackstop.iotbox.online nodes
 kops edit ig --name=frontoffice.hackstop.iotbox.online master-eu-central-1a
   In both cases, change machine type to t2.small and add the
@@ -96,6 +107,7 @@ kops edit ig --name=frontoffice.hackstop.iotbox.online master-eu-central-1a
     Description: Hackstop project for June 2018 Zuhlke days
     Component: Kubernetes master for frontoffice.hackstop.iotbox.online
   (In the case of nodes, substitute “cluster node” for “master”)
+  For the nodes, leave minimum and maximum size at 2 instances. Auto-scaling doesn't work.
 export KOPS_STATE_STORE=s3://clusters.hackstop.iotbox.online
 kops create secret --name frontoffice.hackstop.iotbox.online sshpublickey admin -i ~/.ssh/hackstop.pub
 kops update cluster frontoffice.hackstop.iotbox.online
@@ -128,6 +140,8 @@ uninstall them.
 The following commands are needed to deploy the application. The 
 ```
 cd .../wordpress
+kubectl create -f persistent-volume.yaml
+helm install stable/nfs-server-provisioner --set persistence.enabled=true,persistence.size=10Gi,
 helm install --name front-office-release -f ./values-production.yaml stable/wordpress
 kubectl get svc --namespace default -w front-office-release-wordpress
 ```
