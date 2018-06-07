@@ -1,6 +1,6 @@
 # Set up instructions
 
-Under construction...
+⚠️ Under construction... ⚠️
 
 To set up the lab, run:
 
