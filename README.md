@@ -30,8 +30,14 @@ https://app.vagrantup.com/csi/boxes/kali_rolling/versions/2018.2.2/providers/vmw
 
 Extract the contents and manually install.
 
+Commands to investigate:
+
+```bash
+vagrant box add kali-linux file:///d:/path/to/csi_kali/vmware_desktop.box
+```
 
 #### Tunnels
+
 ```bash
 ssh -i ~/.minikube/machines/minikube/id_rsa -L 30100:localhost:30100 -N docker@`minikube ip`
 ```
