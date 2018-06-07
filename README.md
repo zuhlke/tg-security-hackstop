@@ -2,25 +2,15 @@
 
 Under construction...
 
-## Splunk Forwarder
+To set up the lab, run:
 
 ```bash
-cd SplunkForwarder
-docker build -t splunk_fwdr .
-docker run -it splunk_fwdr:latest
+./scripts/setup.sh
 ```
 
 ## Minikube
 
 ```bash
-minikube start -memory 8192 -cpus 4 --vm-driver hyperkit
-
-helm install -f WordPress/values-stable-wordpress-topicteam.yaml \
-     stable/wordpress \
-     --set-string wordpressPassword=... \
-     --set-string mariadbRootPassword=... \
-     --set-string mariadbPassword=...
-
 ssh -i ~/.minikube/machines/minikube/id_rsa -L 30100:localhost:30100 -N docker@`minikube ip`
 ```
 
