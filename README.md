@@ -43,7 +43,7 @@ This requires a commercial addon.
 
 Alternatively, you can download the .box file from:
 
-https://app.vagrantup.com/csi/boxes/kali_rolling/versions/2018.2.2/providers/vmware_desktop.box
+- https://app.vagrantup.com/csi/boxes/kali_rolling/versions/2018.2.2/providers/vmware_desktop.box
 
 Extract the contents and manually install.
 
@@ -86,10 +86,42 @@ sudo /Applications/VMware\ Fusion.app/Contents/Library/vmnet-cli --start
 
 More information:
 
-http://networkinferno.net/port-forwarding-on-vmware-fusion
+- http://networkinferno.net/port-forwarding-on-vmware-fusion
 
 ##### VirtualBox Fusion NATPF
 
 `VBoxManage`
 
 TBC
+
+### Kali Linux
+
+Useful reference:
+
+- https://www.kali.org/news/kali-linux-metapackages/
+- https://tools.kali.org/tools-listing
+
+### Splunk Enterprise
+
+Register for a trial at:
+
+- https://www.splunk.com/en_us/download/splunk-enterprise/thank-you-enterprise.html
+
+```bash
+wget -O splunk-7.1.1-8f0ead9ec3db-linux-2.6-amd64.deb 'https://www.splunk.com/bin/splunk/DownloadActivityServlet?architecture=x86_64&platform=linux&version=7.1.1&product=splunk&filename=splunk-7.1.1-8f0ead9ec3db-linux-2.6-amd64.deb&wget=true'
+```
+
+Other option, Splunk Enterprise Free (for docker):
+
+- https://hub.docker.com/r/splunk/splunk/
+- https://store.docker.com/images/splunk-enterprise-free-for-docker
+
+### Splunk Enterprise Security
+
+Trial (Cloud):
+
+- https://www.splunk.com/page/sign_up/es_sandbox?redirecturl=%2Fgetsplunk%2Fes_sandbox
+
+Community edition:
+
+- https://www.phantom.us/download/
