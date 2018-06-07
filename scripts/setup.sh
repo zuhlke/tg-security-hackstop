@@ -4,8 +4,9 @@
 # Global Environment Variables
 #####################################################################
 readonly SCRIPT_HOME="$(pushd $(dirname $0)/.. >/dev/null ; echo ${PWD})"
-readonly VM_DRIVER="${VM_DRIVER:-vmwarefusion}"
-readonly MINIKUBE_PROFILE="minikube-security-tt"
+
+readonly MINIKUBE_PROFILE="${MINIKUBE_PROFILE:-minikube-security-tt}"
+readonly MINIKUBE_VM_DRIVER="${MINIKUBE_VM_DRIVER:-virtualbox}"
 
 
 #####################################################################
@@ -117,7 +118,7 @@ function createAndRun_Minikube() {
         rm -rf "${installDir}"
     fi
 
-    minikube --profile=${MINIKUBE_PROFILE} start --cache-images --vm-driver=${VM_DRIVER} --memory=8192 --cpus=4 || exit 1
+    minikube --profile=${MINIKUBE_PROFILE} start --cache-images --vm-driver=${MINIKUBE_VM_DRIVER} --memory=8192 --cpus=4 || exit 1
 }
 
 #####################################################################

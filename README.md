@@ -14,11 +14,20 @@ To set up the lab, run:
 
 ###### Configuration options
 
-To override the default Minikube VM driver the script uses, set variable `VM_DRIVER`:
+Some default settings may be overridden via shell variables.
+
+`MINIKUBE_PROFILE`: the Minikube profile name.
+`MINIKUBE_VM_DRIVER`: the Minikube VM driver.
 
 ```bash
-VM_DRIVER=hyperkit ./scripts/setup.sh
+# Example
+MINIKUBE_VM_DRIVER=hyperkit MINIKUBE_PROFILE=example-profile ./scripts/setup.sh
 ```
+
+Note:
+- changing `MINIKUBE_VM_DRIVER` may cause issues if Kali Linux is not running in the same Hypervisor.
+
+  You will need to use a NATPF set-up or a tunnelling solution to allow Kali to access the Minikube VM.
 
 ###### Kali Linux
 
