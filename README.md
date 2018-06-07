@@ -4,7 +4,7 @@ Pen-testing detection lab.
 
 ⚠️ Under construction ⚠️
 
-#### Set up instructions
+### Set up instructions
 
 To set up the lab, run:
 
@@ -12,7 +12,7 @@ To set up the lab, run:
 ./scripts/setup.sh
 ```
 
-###### Configuration options
+##### Configuration options
 
 Some default settings may be overridden via shell variables.
 
@@ -29,7 +29,7 @@ Note:
 
   You will need to use a NATPF set-up or a tunnelling solution to allow Kali to access the Minikube VM.
 
-###### Kali Linux
+##### Kali Linux
 
 At time of writing, the default credentials are user `vagrant` and password `changeme`.
 
@@ -37,7 +37,7 @@ To access the `root` user, use `sudo`.
 
 You can also use `vagrant ssh` and change the password of the `vagrant` user to a desired value.
 
-###### Vagrant and VMWare Fusion
+##### Vagrant and VMWare Fusion
 
 This requires a commercial addon.
 
@@ -53,19 +53,23 @@ Commands to investigate:
 vagrant box add kali-linux file:///d:/path/to/csi_kali/vmware_desktop.box
 ```
 
-#### Tunnels
+### NATPF and SSH Tunnels
+
+You need to allow Kali to connect to the Minikube VM. This is particularly important when they are not running under the same Hypervisor.
+
+
+##### SSH tunnel
 
 ```bash
-ssh -i ~/.minikube/machines/minikube/id_rsa -L 30100:localhost:30100 -N docker@`minikube ip`
+ssh -i ~/.minikube/machines/<profile_name>/id_rsa -L 30100:localhost:30100 -N docker@`minikube --profile=<profile_name> ip`
+vagrant ssh -- -R 30100:localhost:30100 -N
 ```
 
-### Alternative options to SSH tunnelling:
-
-#### Utility `pfctl` (Mac OSX)
+##### Utility `pfctl` (Mac OSX)
 
 TBC
 
-#### VMWare Fusion NATPF
+##### VMWare Fusion NATPF
 
 Edit `/Library/Preferences/VMware\ Fusion/vmnet???/nat.conf`
 
@@ -84,12 +88,8 @@ More information:
 
 http://networkinferno.net/port-forwarding-on-vmware-fusion
 
-## Install Kali in a VM (Fusion, VirtualBox, etc)
+##### VirtualBox Fusion NATPF
 
-Choose at least 2 GB RAM and sufficient disk space (20 GB recommended).
+`VBoxManage`
 
-When Kali is running, open a shell in Kali and type
-
-```bash
-ssh -L 30100:localhost:30100 -N <your_user_id>@<kali_macos_gateway_ip>
-```
+TBC
