@@ -15,7 +15,11 @@ docker run -it splunk_fwdr:latest
 ```bash
 minikube start -memory 8192 -cpus 4 --vm-driver hyperkit
 
-helm install -f WordPress/values-stable-wordpress-topicteam.yaml stable/wordpress
+helm install -f WordPress/values-stable-wordpress-topicteam.yaml \
+     stable/wordpress \
+     --set-string wordpressPassword=... \
+     --set-string mariadbRootPassword=... \
+     --set-string mariadbPassword=...
 
 ssh -i ~/.minikube/machines/minikube/id_rsa -L 30100:localhost:30100 -N docker@`minikube ip`
 ```
