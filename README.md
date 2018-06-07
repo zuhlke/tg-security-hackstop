@@ -20,6 +20,14 @@ To override the default Minikube VM driver the script uses, set variable `VM_DRI
 VM_DRIVER=hyperkit ./scripts/setup.sh
 ```
 
+###### Kali Linux
+
+At time of writing, the default credentials are user `vagrant` and password `changeme`.
+
+To access the `root` user, use `sudo`. 
+
+You can also use `vagrant ssh` and change the password of the `vagrant` user to a desired value.
+
 ###### Vagrant and VMWare Fusion
 
 This requires a commercial addon.
