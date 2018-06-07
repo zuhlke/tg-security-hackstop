@@ -1,6 +1,10 @@
-# Set up instructions
+## Security Topic Team
 
-⚠️ Under construction... ⚠️
+Pen-testing detection lab.
+
+⚠️ Under construction ⚠️
+
+#### Set up instructions
 
 To set up the lab, run:
 
@@ -8,8 +12,26 @@ To set up the lab, run:
 ./scripts/setup.sh
 ```
 
-## Minikube
+###### Configuration options
 
+To override the default Minikube VM driver the script uses, set variable `VM_DRIVER`:
+
+```bash
+VM_DRIVER=hyperkit ./scripts/setup.sh
+```
+
+###### Vagrant and VMWare Fusion
+
+This requires a commercial addon.
+
+Alternatively, you can download the .box file from:
+
+https://app.vagrantup.com/csi/boxes/kali_rolling/versions/2018.2.2/providers/vmware_desktop.box
+
+Extract the contents and manually install.
+
+
+#### Tunnels
 ```bash
 ssh -i ~/.minikube/machines/minikube/id_rsa -L 30100:localhost:30100 -N docker@`minikube ip`
 ```
