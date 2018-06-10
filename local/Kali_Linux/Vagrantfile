@@ -1,0 +1,11 @@
+Vagrant.configure("2") do |config|
+  config.vm.box = "csi/kali_rolling"
+  config.vm.box_version = "2018.2.2"
+
+  config.vm.provider "virtualbox" do |vb|
+    vb.memory = "2048"
+    vb.cpus = "2"
+    vb.customize ["modifyvm", :id, "--vram", "64"]
+    # vb.customize ["storageattach", :id, "--storagectl", "IDE Controller", "--port", "0", "--device", "0", "--type", "dvddrive", "--medium", "emptydrive"]
+  end
+end
