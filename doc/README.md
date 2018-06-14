@@ -10,6 +10,10 @@ have no way to attack systems on the public Internet, only our system under test
 Kali Linux and and OWASP's ZAP as attacking systems. WordPress and optionally RocketChat will act as the systems under attack.
 Splunk is used as the log aggregator (subsequently possibly ELK). A machine learning system remains to be identified.
 
+# Local set-up
+
+To install the experiment locally on your laptop, for now refer to this [repo](https://github.com/seborama/Camp2018-Security-TT).
+
 # AWS configuration
 
 * VPC configuration `vpc-91d1bbfa` with 3 subnet:
